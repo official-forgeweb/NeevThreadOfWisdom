@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://neevwisdom.com/sitemap.xml
+Sitemap: https://www.neevthreadofwisdom.com/sitemap.xml

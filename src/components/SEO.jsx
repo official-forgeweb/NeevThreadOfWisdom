@@ -7,7 +7,7 @@ const SEO = ({ title, description, keywords, image, url }) => {
     const siteDescription = "NEEV (NTW) Academy is India's premier coaching institute for Classes 6-12, JEE Main, Advanced, and NEET. Experience structured learning with our elite faculty panel.";
     const metaDescription = description || siteDescription;
     const metaKeywords = keywords || "IIT JEE, NEET, Foundation, Class 6-12 coaching, NTW Academy, Neev, entrance exam preparation";
-    const siteUrl = "https://neevwisdom.com"; // Updated to the intended domain
+    const siteUrl = "https://www.neevthreadofwisdom.com"; // Updated to the intended domain
     const fullUrl = url ? `${siteUrl}${url}` : siteUrl;
     const previewImage = image || "/og-image.jpg";
 
