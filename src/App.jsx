@@ -1,0 +1,61 @@
+import React, { useEffect } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import { CSS } from './styles/globalStyles';
+
+import Progress from './components/Progress';
+import Nav from './components/Nav';
+import Hero from './components/Hero';
+import Offers from './components/Offers';
+import About from './components/About';
+import Teachers from './components/Teachers';
+import Testimonials from './components/Testimonials';
+import Gallery from './components/Gallery';
+import Enquiry from './components/Enquiry';
+import Footer from './components/Footer';
+import Floating from './components/Floating';
+import FacultyPage from './components/FacultyPage';
+import CoursePage from './components/CoursePage';
+import GalleryPage from './components/GalleryPage';
+import IndividualCoursePage from './components/IndividualCoursePage';
+import SEO from './components/SEO';
+
+const Home = () => (
+  <>
+    <SEO title="Home" />
+    <Progress />
+    <Hero />
+    <Offers />
+    <About />
+    <Teachers />
+    <Testimonials />
+    <Gallery />
+    <Enquiry />
+  </>
+);
+
+import { ModalProvider } from './context/ModalContext';
+import ModalEnquiry from './components/ModalEnquiry';
+
+export default function App() {
+  useEffect(() => {
+    const fa = document.createElement('link'); fa.rel = 'stylesheet'; fa.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css'; document.head.appendChild(fa);
+    const s = document.createElement('style'); s.textContent = CSS; document.head.appendChild(s); return () => { document.head.removeChild(s) }
+  }, []);
+  return (
+    <ModalProvider>
+      <div className="font-dm antialiased">
+        <Nav />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/faculty" element={<FacultyPage />} />
+          <Route path="/courses" element={<CoursePage />} />
+          <Route path="/courses/:id" element={<IndividualCoursePage />} />
+          <Route path="/gallery" element={<GalleryPage />} />
+        </Routes>
+        <Footer />
+        <Floating />
+        <ModalEnquiry />
+      </div>
+    </ModalProvider>
+  )
+}
