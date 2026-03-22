@@ -12,7 +12,7 @@ const Offers = () => {
         { id: 'foundation-batch', badge: 'MIDDLE SCHOOL', type: 'CLASSES 6 TO 8', price: '18,000', monthly: '1,800', features: ['Strong Foundations', 'Concept Building', 'Weekly Tests', 'Performance Reports'], hl: false },
         { id: 'foundation-batch', badge: 'HIGH SCHOOL', type: 'CLASSES 9 & 10', price: '13,000', monthly: '1,300', features: ['Board Exam Focus', 'Doubt Clearing Sessions', 'Comprehensive Material', 'Mock Exams'], hl: false },
         { id: 'jee-main-advanced', badge: 'SENIOR SEC.', type: '11TH & 12TH SCI/COM', price: '20,000', monthly: '2,000', features: ['Core Concepts', 'Expert Faculty', 'Board Pattern Focus', 'Career Guidance'], hl: false },
-        { id: 'boson-batch', badge: 'COMPETITIVE', type: 'JEE & NEET', price: '30,000', monthly: '3,000', features: ['Rank Booster Program', 'Extensive DPPs', 'All India Test Series', 'Personal Mentorship'], hl: true }
+        { id: 'boson-batch', badge: 'COMPETITIVE', type: 'BOSON BATCH -  JEE & NEET', price: '30,000', monthly: '3,000', features: ['Rank Booster Program', 'Extensive DPPs', 'All India Test Series', 'Personal Mentorship'], hl: true }
     ];
 
     return (
