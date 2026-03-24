@@ -20,9 +20,9 @@ export const courses = [
     {
         id: "foundation-batch",
         title: "Foundation Batch",
-        subtitle: "Class 6th - 10th",
+        subtitle: "Class 1st - 10th",
         shortDescription: "Building a strong base from an early age focusing on conceptual clarity and analytical thinking for future competitive exams.",
-        fullDescription: "Our Foundation Batch is specifically designed for young minds in classes 6th to 10th. We focus on strengthening the core concepts of Science and Mathematics while introducing students to logical reasoning and analytical thinking. This early exposure prepares them for various Olympiads like NTSE, KVPY, and sets a solid groundwork for future JEE/NEET preparation. We believe in making learning fun and interactive to foster a genuine interest in the subjects.",
+        fullDescription: "Our Foundation Batch is specifically designed for young minds in classes 1st to 10th. We focus on strengthening the core concepts of Science and Mathematics while introducing students to logical reasoning and analytical thinking. This early exposure prepares them for various Olympiads like NTSE, KVPY, and sets a solid groundwork for future JEE/NEET preparation. We believe in making learning fun and interactive to foster a genuine interest in the subjects.",
         duration: "Multiple Years",
         curriculum: [
             { module: "Science Foundation", topics: ["Physics Fundamentals", "Chemistry Basics", "Biological Systems"] },
@@ -67,5 +67,22 @@ export const courses = [
         features: ["Biology Specialization", "Previous Year Analytics", "NTA Pattern Mock Tests", "Daily Practice Papers"],
         color: "#E53E3E",
         image: "https://images.unsplash.com/photo-1576091160550-217359f4ecf8?q=80&w=1000&auto=format&fit=crop"
+    },
+    {
+        id: "accountancy-batch",
+        title: "Accountancy Batch",
+        subtitle: "Commerce Specialized",
+        shortDescription: "Expert-led coaching for commerce students focusing on comprehensive Accountancy concepts and board preparation.",
+        fullDescription: "Our Accountancy Batch is specially designed for commerce students to master the complexities of financial accounting, partnership accounts, and company accounts. Led by our senior faculty Sushil Patel with over 18 years of experience, this batch guarantees an in-depth understanding of core principles. We focus on building a strong foundation that not only prepares students to score top marks in board exams but also sets the stage for professional courses like CA, CS, and CMA.",
+        duration: "1 Year",
+        curriculum: [
+            { module: "Fundamentals", topics: ["Basic Accounting Terms", "Accounting Equation", "Journal & Ledger"] },
+            { module: "Intermediate", topics: ["Cash Book", "Bank Reconciliation", "Depreciation & Provisions"] },
+            { module: "Advanced", topics: ["Partnership Accounts", "Company Accounts", "Cash Flow Statements"] }
+        ],
+        faculty: "Sushil Patel (18+ Yrs Exp)",
+        features: ["Starts 2nd April 2026", "Timing: 4 to 5:30 pm", "Comprehensive Coverage", "Regular Assessments"],
+        color: "#1F2937",
+        image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=1000&auto=format&fit=crop"
     }
 ];
