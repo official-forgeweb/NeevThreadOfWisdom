@@ -15,10 +15,7 @@ const connectDB = async () => {
             throw new Error("MONGO_URI is missing in the environment variables.");
         }
         
-        const db = await mongoose.connect(process.env.MONGO_URI, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        });
+        const db = await mongoose.connect(process.env.MONGO_URI);
 
         isConnected = db.connections[0].readyState;
         console.log(`✅ MongoDB Connected: ${db.connection.host}`);
