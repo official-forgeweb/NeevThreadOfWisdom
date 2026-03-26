@@ -126,11 +126,25 @@ const AdminDashboard = () => {
     });
 
     if (loading && !isRefreshing) return (
-        <div className="flex items-center justify-center min-vh-100 w-full bg-[#F0F3F9]">
-            <div className="flex flex-col items-center">
-                <i className="fa-solid fa-circle-notch animate-spin text-4xl text-[#1A3A7A] mb-4"></i>
-                <p className="font-space font-bold uppercase tracking-widest text-xs text-[#6B7B8D]">Loading Academy Data...</p>
-            </div>
+        <div className="admin-layout flex flex-col md:flex-row min-h-screen bg-[#F0F3F9]">
+            {/* Loading Sidebar */}
+            <aside className="admin-sidebar hidden lg:flex">
+                <div className="admin-sidebar-brand">
+                    <div className="w-24 h-8 bg-white/10 rounded-md animate-pulse"></div>
+                </div>
+                <div className="p-4 space-y-4">
+                    {[1, 2, 3].map(i => <div key={i} className="w-full h-12 bg-white/5 rounded-xl animate-pulse"></div>)}
+                </div>
+            </aside>
+            <main className="admin-main-content flex-1 p-8 lg:p-12">
+                <div className="w-64 h-12 bg-gray-200 rounded-2xl animate-pulse mb-10"></div>
+                <div className="admin-stats-grid mb-10">
+                    {[1, 2, 3, 4].map(i => <div key={i} className="h-32 bg-white rounded-[24px] border border-black/5 animate-pulse"></div>)}
+                </div>
+                <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
+                    {[1, 2].map(i => <div key={i} className="h-80 bg-white rounded-[32px] border border-black/5 animate-pulse"></div>)}
+                </div>
+            </main>
         </div>
     );
 
@@ -153,12 +167,10 @@ const AdminDashboard = () => {
                     <div className={`admin-nav-item ${activePage === 'enquiries' ? 'active' : ''}`} onClick={() => {setActivePage('enquiries'); setSidebarOpen(false)}}>
                         <i className="fa-solid fa-message"></i>
                         <span>Enquiries</span>
-                        {stats.newEnquiries > 0 && <span className="bg-red-500 text-white text-[10px] rounded-full px-2 py-0.5 ml-auto">{stats.newEnquiries}</span>}
                     </div>
                     <div className={`admin-nav-item ${activePage === 'registrations' ? 'active' : ''}`} onClick={() => {setActivePage('registrations'); setSidebarOpen(false)}}>
                         <i className="fa-solid fa-user-plus"></i>
                         <span>Registrations</span>
-                        {stats.newRegistrations > 0 && <span className="bg-red-500 text-white text-[10px] rounded-full px-2 py-0.5 ml-auto">{stats.newRegistrations}</span>}
                     </div>
                 </nav>
                 <div className="p-4 border-t border-white/5">
