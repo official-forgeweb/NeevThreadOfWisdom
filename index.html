@@ -11,6 +11,18 @@
     content="NTW Academy, coaching institute, IIT JEE, NEET, Classes 6-12, Structured Learning, Expert Faculty" />
   <title>NTW Academy — Academic Excellence | Classes 6-12 | JEE & NEET Preparation</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Suppress Browser Extension Console Errors -->
+  <script>
+    window.addEventListener('error', function(e) {
+      if (e.filename && e.filename.includes('page-events.js')) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    }, true);
+    window.onerror = function(message, source) {
+      if (source && source.includes('page-events.js')) return true;
+    };
+  </script>
 </head>
 
 <body>
