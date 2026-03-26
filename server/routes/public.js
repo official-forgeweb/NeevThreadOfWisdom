@@ -32,7 +32,7 @@ router.post('/enquiry', async (req, res) => {
         res.json({ success: true, message: 'Enquiry submitted successfully' });
     } catch (err) {
         console.error('Enquiry error:', err);
-        res.status(500).json({ error: 'Internal server error' });
+        res.status(500).json({ error: 'Internal server error', details: err.message });
     }
 });
 
@@ -58,7 +58,7 @@ router.post('/registration', async (req, res) => {
         res.json({ success: true, message: 'Registration submitted successfully' });
     } catch (err) {
         console.error('Registration error:', err);
-        res.status(500).json({ error: 'Internal server error' });
+        res.status(500).json({ error: 'Internal server error', details: err.message });
     }
 });
 
