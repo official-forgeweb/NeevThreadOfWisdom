@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import { v4 as uuid } from 'uuid';
-import { create } from '../utils/store.js';
-import { sendAdminNotification } from '../utils/mailer.js';
+import Enquiry from '../models/Enquiry.js';
+import Registration from '../models/Registration.js';
+import { sendAdminNotification, sendUserConfirmation } from '../utils/mailer.js';
 
 const router = Router();
 
@@ -14,8 +14,7 @@ router.post('/enquiry', async (req, res) => {
             return res.status(400).json({ error: 'Name and phone are required' });
         }
 
-        const entry = {
-            id: uuid(),
+        const entry = await Enquiry.create({
             name,
             phone,
             email: email || '',
@@ -24,13 +23,11 @@ router.post('/enquiry', async (req, res) => {
             source: req.body._source || 'website',
             status: 'new',
             notes: '',
-            createdAt: new Date().toISOString(),
-        };
-
-        create('enquiries.json', entry);
+        });
 
         // Send admin notification email (non-blocking)
         sendAdminNotification('enquiry', entry).catch(() => {});
+        sendUserConfirmation('enquiry', entry).catch(() => {}); // Send confirmation back to user
 
         res.json({ success: true, message: 'Enquiry submitted successfully' });
     } catch (err) {
@@ -48,18 +45,15 @@ router.post('/registration', async (req, res) => {
             return res.status(400).json({ error: 'Student name and father\'s name are required' });
         }
 
-        const entry = {
-            id: uuid(),
+        const entry = await Registration.create({
             ...data,
             status: 'new',
             notes: '',
-            createdAt: new Date().toISOString(),
-        };
-
-        create('registrations.json', entry);
+        });
 
         // Send admin notification email (non-blocking)
         sendAdminNotification('registration', entry).catch(() => {});
+        sendUserConfirmation('registration', entry).catch(() => {}); // Send confirmation back to user
 
         res.json({ success: true, message: 'Registration submitted successfully' });
     } catch (err) {

@@ -2,7 +2,8 @@ import { Router } from 'express';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 import { authMiddleware } from '../middleware/auth.js';
-import { getAll, getById, update, remove } from '../utils/store.js';
+import Enquiry from '../models/Enquiry.js';
+import Registration from '../models/Registration.js';
 
 const router = Router();
 
@@ -34,80 +35,111 @@ router.post('/login', async (req, res) => {
 });
 
 // GET /api/admin/stats
-router.get('/stats', authMiddleware, (req, res) => {
-    const enquiries = getAll('enquiries.json');
-    const registrations = getAll('registrations.json');
+router.get('/stats', authMiddleware, async (req, res) => {
+    try {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
 
-    const today = new Date().toISOString().split('T')[0];
+        const [
+            totalEnquiries, totalRegistrations,
+            newEnquiries, newRegistrations,
+            todayEnquiries, todayRegistrations,
+            contactedEnquiries, enrolledRegistrations
+        ] = await Promise.all([
+            Enquiry.countDocuments(),
+            Registration.countDocuments(),
+            Enquiry.countDocuments({ status: 'new' }),
+            Registration.countDocuments({ status: 'new' }),
+            Enquiry.countDocuments({ createdAt: { $gte: today } }),
+            Registration.countDocuments({ createdAt: { $gte: today } }),
+            Enquiry.countDocuments({ status: 'contacted' }),
+            Registration.countDocuments({ status: 'enrolled' })
+        ]);
 
-    res.json({
-        totalEnquiries: enquiries.length,
-        totalRegistrations: registrations.length,
-        newEnquiries: enquiries.filter(e => e.status === 'new').length,
-        newRegistrations: registrations.filter(r => r.status === 'new').length,
-        todayEnquiries: enquiries.filter(e => e.createdAt?.startsWith(today)).length,
-        todayRegistrations: registrations.filter(r => r.createdAt?.startsWith(today)).length,
-        contactedEnquiries: enquiries.filter(e => e.status === 'contacted').length,
-        enrolledRegistrations: registrations.filter(r => r.status === 'enrolled').length,
-    });
+        res.json({
+            totalEnquiries, totalRegistrations,
+            newEnquiries, newRegistrations,
+            todayEnquiries, todayRegistrations,
+            contactedEnquiries, enrolledRegistrations
+        });
+    } catch (err) {
+        console.error('Stats error:', err);
+        res.status(500).json({ error: 'Server error' });
+    }
 });
 
 // --- ENQUIRIES CRUD ---
 
 // GET /api/admin/enquiries
-router.get('/enquiries', authMiddleware, (req, res) => {
-    const data = getAll('enquiries.json');
-    res.json(data);
+router.get('/enquiries', authMiddleware, async (req, res) => {
+    try {
+        const data = await Enquiry.find().sort({ createdAt: -1 });
+        res.json(data);
+    } catch (err) { res.status(500).json({ error: 'Server error' }); }
 });
 
 // GET /api/admin/enquiries/:id
-router.get('/enquiries/:id', authMiddleware, (req, res) => {
-    const item = getById('enquiries.json', req.params.id);
-    if (!item) return res.status(404).json({ error: 'Not found' });
-    res.json(item);
+router.get('/enquiries/:id', authMiddleware, async (req, res) => {
+    try {
+        const item = await Enquiry.findById(req.params.id);
+        if (!item) return res.status(404).json({ error: 'Not found' });
+        res.json(item);
+    } catch (err) { res.status(500).json({ error: 'Server error' }); }
 });
 
 // PUT /api/admin/enquiries/:id
-router.put('/enquiries/:id', authMiddleware, (req, res) => {
-    const updated = update('enquiries.json', req.params.id, req.body);
-    if (!updated) return res.status(404).json({ error: 'Not found' });
-    res.json(updated);
+router.put('/enquiries/:id', authMiddleware, async (req, res) => {
+    try {
+        const updated = await Enquiry.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        if (!updated) return res.status(404).json({ error: 'Not found' });
+        res.json(updated);
+    } catch (err) { res.status(500).json({ error: 'Server error' }); }
 });
 
 // DELETE /api/admin/enquiries/:id
-router.delete('/enquiries/:id', authMiddleware, (req, res) => {
-    const deleted = remove('enquiries.json', req.params.id);
-    if (!deleted) return res.status(404).json({ error: 'Not found' });
-    res.json({ success: true });
+router.delete('/enquiries/:id', authMiddleware, async (req, res) => {
+    try {
+        const deleted = await Enquiry.findByIdAndDelete(req.params.id);
+        if (!deleted) return res.status(404).json({ error: 'Not found' });
+        res.json({ success: true });
+    } catch (err) { res.status(500).json({ error: 'Server error' }); }
 });
 
 // --- REGISTRATIONS CRUD ---
 
 // GET /api/admin/registrations
-router.get('/registrations', authMiddleware, (req, res) => {
-    const data = getAll('registrations.json');
-    res.json(data);
+router.get('/registrations', authMiddleware, async (req, res) => {
+    try {
+        const data = await Registration.find().sort({ createdAt: -1 });
+        res.json(data);
+    } catch (err) { res.status(500).json({ error: 'Server error' }); }
 });
 
 // GET /api/admin/registrations/:id
-router.get('/registrations/:id', authMiddleware, (req, res) => {
-    const item = getById('registrations.json', req.params.id);
-    if (!item) return res.status(404).json({ error: 'Not found' });
-    res.json(item);
+router.get('/registrations/:id', authMiddleware, async (req, res) => {
+    try {
+        const item = await Registration.findById(req.params.id);
+        if (!item) return res.status(404).json({ error: 'Not found' });
+        res.json(item);
+    } catch (err) { res.status(500).json({ error: 'Server error' }); }
 });
 
 // PUT /api/admin/registrations/:id
-router.put('/registrations/:id', authMiddleware, (req, res) => {
-    const updated = update('registrations.json', req.params.id, req.body);
-    if (!updated) return res.status(404).json({ error: 'Not found' });
-    res.json(updated);
+router.put('/registrations/:id', authMiddleware, async (req, res) => {
+    try {
+        const updated = await Registration.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        if (!updated) return res.status(404).json({ error: 'Not found' });
+        res.json(updated);
+    } catch (err) { res.status(500).json({ error: 'Server error' }); }
 });
 
 // DELETE /api/admin/registrations/:id
-router.delete('/registrations/:id', authMiddleware, (req, res) => {
-    const deleted = remove('registrations.json', req.params.id);
-    if (!deleted) return res.status(404).json({ error: 'Not found' });
-    res.json({ success: true });
+router.delete('/registrations/:id', authMiddleware, async (req, res) => {
+    try {
+        const deleted = await Registration.findByIdAndDelete(req.params.id);
+        if (!deleted) return res.status(404).json({ error: 'Not found' });
+        res.json({ success: true });
+    } catch (err) { res.status(500).json({ error: 'Server error' }); }
 });
 
 export default router;

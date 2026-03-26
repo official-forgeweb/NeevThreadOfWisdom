@@ -81,3 +81,57 @@ export async function sendAdminNotification(type, data) {
         console.error('❌ Email send failed:', err.message);
     }
 }
+
+export async function sendUserConfirmation(type, data) {
+    if (!data.email) return; // Only send if user provided an email
+
+    const mail = getTransporter();
+    const isEnquiry = type === 'enquiry';
+
+    const subject = isEnquiry
+        ? `Thank you for your enquiry, ${data.name} — NEEV Academy`
+        : `Registration Received: ${data.studentName} — NEEV Academy`;
+
+    const titleText = isEnquiry
+        ? `We've Received Your Enquiry`
+        : `We've Received Your Registration`;
+
+    const bodyText = isEnquiry
+        ? `Dear <strong>${data.name}</strong>,<br><br>Thank you for reaching out to NEEV - Thread of Wisdom.<br><br>We have received your enquiry regarding the <strong>${data.exam || 'courses'}</strong>. Our academic counselor will review your details and get back to you shortly at <strong>${data.phone}</strong>.`
+        : `Dear Parent/Guardian,<br><br>Thank you for choosing NEEV - Thread of Wisdom.<br><br>We have successfully received the registration details for <strong>${data.studentName}</strong>. Our admissions team is reviewing the application and will contact you shortly to process the enrollment.`;
+
+    const html = `
+        <div style="font-family:'Segoe UI',Arial,sans-serif;max-width:600px;margin:auto;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden;">
+            <div style="background:#0A1628;padding:24px 32px;text-align:center;">
+                <h1 style="color:#C9A84C;margin:0;font-size:24px;letter-spacing:2px;">NEEV</h1>
+                <p style="color:#8899AA;margin:4px 0 0;font-size:11px;letter-spacing:3px;">THREAD OF WISDOM</p>
+            </div>
+            <div style="padding:32px;">
+                <h2 style="color:#1A3A7A;margin:0 0 20px;font-size:20px;">${titleText}</h2>
+                <div style="color:#0A1628;line-height:1.6;font-size:14px;">
+                    ${bodyText}
+                    <br><br>
+                    If you have any urgent questions, feel free to reply directly to this email or call us.
+                    <br><br>
+                    Warm Regards,<br>
+                    <strong>The NEEV Academy Team</strong>
+                </div>
+            </div>
+            <div style="background:#F0F3F9;padding:20px;text-align:center;font-size:11px;color:#6B7B8D;">
+                NEEV - Thread of Wisdom<br>
+                Empowering Minds, Shaping Futures
+            </div>
+        </div>`;
+
+    try {
+        await mail.sendMail({
+            from: `"NEEV Academy Teams" <${process.env.EMAIL_USER}>`,
+            to: data.email,
+            subject,
+            html,
+        });
+        console.log(`✅ User confirmation email sent to ${data.email} for ${type}`);
+    } catch (err) {
+        console.error('❌ User confirmation email send failed:', err.message);
+    }
+}

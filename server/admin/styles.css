@@ -1,7 +1,7 @@
 /* ===== NEEV ADMIN PANEL — LIGHT / DAY THEME ===== */
 /* Matching the main website: #F0F3F9 bg, white cards, Anton/Space Grotesk/DM Sans */
 
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Anton&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap');
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -35,7 +35,7 @@
 }
 
 body {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Inter', sans-serif;
     background: var(--bg);
     color: var(--text);
     min-height: 100vh;
@@ -78,19 +78,19 @@ body {
     border-bottom: 1px solid rgba(255,255,255,0.06);
 }
 .sidebar-brand h1 {
-    font-family: 'Anton', sans-serif;
-    font-size: 36px;
-    font-weight: 400;
+    font-family: 'Outfit', sans-serif;
+    font-size: 32px;
+    font-weight: 800;
     color: var(--gold);
-    letter-spacing: 8px;
+    letter-spacing: 4px;
     text-transform: uppercase;
     line-height: 1;
 }
 .sidebar-brand span {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 9px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 10px;
     color: rgba(255,255,255,0.35);
-    letter-spacing: 4px;
+    letter-spacing: 3px;
     text-transform: uppercase;
     font-weight: 600;
     display: block;
@@ -113,7 +113,7 @@ body {
     border-radius: var(--radius-sm);
     color: rgba(255,255,255,0.45);
     text-decoration: none;
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Outfit', sans-serif;
     font-size: 14px;
     font-weight: 500;
     transition: all 0.3s cubic-bezier(.22,1,.36,1);
@@ -148,7 +148,7 @@ body {
     margin-left: auto;
     background: var(--royal);
     color: #fff;
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Outfit', sans-serif;
     font-size: 11px;
     font-weight: 700;
     padding: 3px 10px;
@@ -171,7 +171,7 @@ body {
     background: rgba(239,68,68,0.06);
     color: #f87171;
     border-radius: var(--radius-sm);
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Outfit', sans-serif;
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
@@ -202,18 +202,18 @@ body {
     gap: 10px;
 }
 .mobile-brand h1 {
-    font-family: 'Anton', sans-serif;
+    font-family: 'Outfit', sans-serif;
     font-size: 22px;
-    font-weight: 400;
+    font-weight: 800;
     color: var(--gold);
-    letter-spacing: 5px;
+    letter-spacing: 2px;
     text-transform: uppercase;
 }
 .mobile-brand span {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Outfit', sans-serif;
     font-size: 10px;
     color: rgba(255,255,255,0.35);
-    letter-spacing: 2px;
+    letter-spacing: 1.5px;
     font-weight: 600;
 }
 .menu-toggle, .logout-btn-mobile {
@@ -265,12 +265,12 @@ body {
     gap: 20px;
 }
 .page-header h2 {
-    font-family: 'Anton', sans-serif;
+    font-family: 'Outfit', sans-serif;
     font-size: 40px;
-    font-weight: 400;
+    font-weight: 700;
     color: var(--ink);
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    letter-spacing: -0.5px;
+    text-transform: capitalize;
 }
 .page-header p {
     font-family: 'Space Grotesk', sans-serif;
@@ -409,12 +409,12 @@ body {
 .stat-icon.orange  { background: rgba(249,115,22,0.08); color: #ea580c; }
 
 .stat-info h3 {
-    font-family: 'Anton', sans-serif;
+    font-family: 'Outfit', sans-serif;
     font-size: 32px;
-    font-weight: 400;
+    font-weight: 700;
     color: var(--ink);
     line-height: 1;
-    letter-spacing: 1px;
+    letter-spacing: -1px;
 }
 .stat-info p {
     font-family: 'Space Grotesk', sans-serif;
@@ -444,15 +444,15 @@ body {
     background: rgba(26,58,122,0.02);
 }
 .section-header h3 {
-    font-family: 'Anton', sans-serif;
+    font-family: 'Outfit', sans-serif;
     font-size: 16px;
-    font-weight: 400;
+    font-weight: 600;
     color: var(--ink);
     display: flex;
     align-items: center;
     gap: 12px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+    text-transform: capitalize;
+    letter-spacing: 0;
 }
 .section-header h3 i { color: var(--royal); font-size: 14px; }
 
@@ -475,8 +475,8 @@ body {
 }
 .data-table td {
     padding: 16px 24px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
     border-bottom: 1px solid var(--border-subtle);
     white-space: nowrap;
     color: var(--text-dim);
@@ -491,7 +491,7 @@ body {
     gap: 6px;
     padding: 5px 14px;
     border-radius: 20px;
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Outfit', sans-serif;
     font-size: 11px;
     font-weight: 700;
     text-transform: uppercase;
@@ -549,7 +549,7 @@ body {
     text-align: center;
     padding: 48px 20px;
     color: var(--text-muted);
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Outfit', sans-serif;
     font-size: 14px;
     letter-spacing: 0.5px;
 }
@@ -593,12 +593,12 @@ body {
     border-bottom: 1px solid var(--border);
 }
 .modal-header h3 {
-    font-family: 'Anton', sans-serif;
+    font-family: 'Outfit', sans-serif;
     font-size: 20px;
-    font-weight: 400;
+    font-weight: 700;
     color: var(--ink);
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 1.5px;
 }
 .modal-close {
     background: var(--bg);
@@ -639,7 +639,7 @@ body {
 .detail-row:last-child { border-bottom: none; }
 
 .detail-label {
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Outfit', sans-serif;
     font-size: 11px;
     color: var(--text-dim);
     font-weight: 700;
@@ -649,7 +649,7 @@ body {
     width: 40%;
 }
 .detail-value {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 14px;
     color: var(--ink);
     text-align: right;
@@ -670,7 +670,7 @@ body {
     border: 1px solid var(--border);
     background: var(--bg);
     color: var(--text-dim);
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Outfit', sans-serif;
     font-size: 12px;
     font-weight: 700;
     cursor: pointer;
@@ -696,7 +696,7 @@ body {
     border: 1px solid rgba(239,68,68,0.12);
     background: rgba(239,68,68,0.04);
     color: #dc2626;
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Outfit', sans-serif;
     font-size: 12px;
     font-weight: 700;
     cursor: pointer;
@@ -716,7 +716,7 @@ body {
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
     color: var(--ink);
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Inter', sans-serif;
     font-size: 13px;
     outline: none;
     resize: vertical;
@@ -737,7 +737,7 @@ body {
     right: 32px;
     padding: 16px 28px;
     border-radius: var(--radius-sm);
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Outfit', sans-serif;
     font-size: 13px;
     font-weight: 600;
     z-index: 300;
