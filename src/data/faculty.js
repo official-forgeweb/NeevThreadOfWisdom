@@ -8,7 +8,7 @@ export const faculty = [
         name: 'Vanshika Mam', 
         subject: '10th Science, NEET', 
         experience: '3 yrs exp at NTW', 
-        image: 'https://i.pravatar.cc/200?u=vanshika',
+        image: null,
         bio: 'Dedicated to making complex biological concepts simple for NEET aspirants.'
     },
     { 
@@ -36,7 +36,7 @@ export const faculty = [
         name: 'Vivek Sir', 
         subject: '11th Maths, Physics', 
         experience: 'Expert Faculty', 
-        image: 'https://i.pravatar.cc/200?u=vivek',
+        image: null,
         bio: 'Specialist in foundation mathematics and conceptual physics.'
     },
     { 

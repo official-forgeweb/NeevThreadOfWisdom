@@ -12,7 +12,7 @@ const Enquiry = () => {
         const data = new FormData(form);
 
         try {
-            const res = await fetch('https://formsubmit.co/ajax/Neevthreadofwisdom@gmail.com', {
+            const res = await fetch('/api/enquiry', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
                 body: JSON.stringify({
@@ -21,7 +21,7 @@ const Enquiry = () => {
                     email: data.get('email'),
                     exam: data.get('exam'),
                     message: data.get('message'),
-                    _subject: 'New NTW Website Enquiry',
+                    _source: 'enquiry-form',
                 })
             });
             if (res.ok) {

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>Dashboard — NEEV Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=Anton&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-brand">
+            <h1>NEEV</h1>
+            <span>Thread of Wisdom</span>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="#" class="nav-item active" data-page="dashboard">
+                <i class="fa-solid fa-grid-2"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="#" class="nav-item" data-page="enquiries">
+                <i class="fa-solid fa-message-dots fa-message"></i>
+                <span>Enquiries</span>
+                <span class="badge" id="enquiryBadge">0</span>
+            </a>
+            <a href="#" class="nav-item" data-page="registrations">
+                <i class="fa-solid fa-user-plus"></i>
+                <span>Registrations</span>
+                <span class="badge" id="regBadge">0</span>
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <button class="logout-btn" id="logoutBtn">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Mobile header -->
+    <header class="mobile-header">
+        <button class="menu-toggle" id="menuToggle">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+        <div class="mobile-brand">
+            <h1>NEEV</h1>
+            <span>Admin</span>
+        </div>
+        <button class="logout-btn-mobile" id="logoutBtnMobile">
+            <i class="fa-solid fa-right-from-bracket"></i>
+        </button>
+    </header>
+
+    <!-- Mobile overlay -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Dashboard Page -->
+        <div class="page active" id="page-dashboard">
+            <div class="page-header">
+                <div>
+                    <h2>Dashboard</h2>
+                    <p>Welcome back, Admin</p>
+                </div>
+                <button class="refresh-btn" id="refreshBtn">
+                    <i class="fa-solid fa-arrows-rotate"></i>
+                    Refresh
+                </button>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon blue"><i class="fa-solid fa-message"></i></div>
+                    <div class="stat-info">
+                        <h3 id="statTotalEnq">0</h3>
+                        <p>Total Enquiries</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon gold"><i class="fa-solid fa-user-plus"></i></div>
+                    <div class="stat-info">
+                        <h3 id="statTotalReg">0</h3>
+                        <p>Total Registrations</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon green"><i class="fa-solid fa-bell"></i></div>
+                    <div class="stat-info">
+                        <h3 id="statNewEnq">0</h3>
+                        <p>New Enquiries</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon purple"><i class="fa-solid fa-clock"></i></div>
+                    <div class="stat-info">
+                        <h3 id="statNewReg">0</h3>
+                        <p>New Registrations</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon cyan"><i class="fa-solid fa-calendar-day"></i></div>
+                    <div class="stat-info">
+                        <h3 id="statTodayEnq">0</h3>
+                        <p>Today's Enquiries</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon orange"><i class="fa-solid fa-calendar-check"></i></div>
+                    <div class="stat-info">
+                        <h3 id="statTodayReg">0</h3>
+                        <p>Today's Registrations</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="section-card">
+                <div class="section-header">
+                    <h3><i class="fa-solid fa-clock-rotate-left"></i> Recent Enquiries</h3>
+                </div>
+                <div id="recentEnquiries" class="table-wrap">
+                    <p class="empty-state">Loading...</p>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <div class="section-header">
+                    <h3><i class="fa-solid fa-user-check"></i> Recent Registrations</h3>
+                </div>
+                <div id="recentRegistrations" class="table-wrap">
+                    <p class="empty-state">Loading...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Enquiries Page -->
+        <div class="page" id="page-enquiries">
+            <div class="page-header">
+                <div>
+                    <h2>Enquiries</h2>
+                    <p>Manage all student enquiries</p>
+                </div>
+                <div class="header-actions">
+                    <div class="search-box">
+                        <i class="fa-solid fa-search"></i>
+                        <input type="text" placeholder="Search enquiries..." id="searchEnquiries">
+                    </div>
+                    <select class="filter-select" id="filterEnquiries">
+                        <option value="all">All Status</option>
+                        <option value="new">New</option>
+                        <option value="contacted">Contacted</option>
+                        <option value="resolved">Resolved</option>
+                    </select>
+                </div>
+            </div>
+            <div class="section-card">
+                <div id="enquiriesTable" class="table-wrap">
+                    <p class="empty-state">Loading...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Registrations Page -->
+        <div class="page" id="page-registrations">
+            <div class="page-header">
+                <div>
+                    <h2>Registrations</h2>
+                    <p>Manage all student registrations</p>
+                </div>
+                <div class="header-actions">
+                    <div class="search-box">
+                        <i class="fa-solid fa-search"></i>
+                        <input type="text" placeholder="Search registrations..." id="searchRegistrations">
+                    </div>
+                    <select class="filter-select" id="filterRegistrations">
+                        <option value="all">All Status</option>
+                        <option value="new">New</option>
+                        <option value="contacted">Contacted</option>
+                        <option value="enrolled">Enrolled</option>
+                        <option value="rejected">Rejected</option>
+                    </select>
+                </div>
+            </div>
+            <div class="section-card">
+                <div id="registrationsTable" class="table-wrap">
+                    <p class="empty-state">Loading...</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Detail Modal -->
+    <div class="modal-overlay" id="detailModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Details</h3>
+                <button class="modal-close" id="modalClose"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body" id="modalBody">
+            </div>
+            <div class="modal-footer" id="modalFooter">
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>

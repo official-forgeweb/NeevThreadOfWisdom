@@ -11,8 +11,12 @@ const Teachers = ({ showBio = false }) => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-10">
             {faculty.map((t, i) => (
                 <div key={i} className={`card text-center group hover:border-[#1A3A7A]/30 bg-[#F0F3F9] shadow-none hover:bg-white hover:shadow-[0_20px_40px_rgba(10,22,40,0.1)] p-4 sm:p-8 ${v ? 'reveal-v' : 'reveal-h'}`} style={{ transitionDelay: `${i * 100}ms` }}>
-                    <div className="w-20 h-20 sm:w-32 sm:h-32 mx-auto mb-3 sm:mb-6 overflow-hidden rounded-xl sm:rounded-[2rem] group-hover:rounded-full transition-all duration-500 border-2 sm:border-4 border-white shadow-md">
-                        <img src={t.image} alt={t.name} className="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" />
+                    <div className="w-20 h-20 sm:w-32 sm:h-32 mx-auto mb-3 sm:mb-6 overflow-hidden rounded-xl sm:rounded-[2rem] group-hover:rounded-full transition-all duration-500 border-2 sm:border-4 border-white shadow-md bg-white flex items-center justify-center">
+                        {t.image ? (
+                            <img src={t.image} alt={t.name} className="w-full h-full object-cover group-hover:scale-110 transition-all duration-700" />
+                        ) : (
+                            <i className="fa-solid fa-graduation-cap text-3xl sm:text-5xl text-[#1A3A7A]/30"></i>
+                        )}
                     </div>
                     <h4 className="font-anton text-lg sm:text-2xl text-[#0A1628] mb-1 sm:mb-2 tracking-wide">{t.name}</h4>
                     <span className="inline-block font-space text-[9px] sm:text-xs font-bold text-white bg-[#1A3A7A] px-2 sm:px-4 py-1 sm:py-1.5 rounded-full mb-2 sm:mb-3 uppercase tracking-[0.1em] sm:tracking-[0.15em] shadow-sm">{t.subject}</span>

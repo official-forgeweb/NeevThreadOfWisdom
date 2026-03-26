@@ -49,7 +49,8 @@ const Nav = () => {
                             <Link key={l.n} to={l.path} onClick={() => sm(false)} className="font-anton text-3xl sm:text-5xl text-[#0A1628] hover:text-[#1A3A7A] transition-colors uppercase" style={{ animation: `fadeUp .4s ease ${i * 80}ms both` }}>{l.n}</Link> :
                             <a key={l.n} href={getHref(l)} onClick={() => sm(false)} className="font-anton text-3xl sm:text-5xl text-[#0A1628] hover:text-[#1A3A7A] transition-colors uppercase" style={{ animation: `fadeUp .4s ease ${i * 80}ms both` }}>{l.n}</a>
                     ))}
-                    <button onClick={() => { sm(false); openEnquiryModal(); }} className="btn-royal mt-6 sm:mt-8 text-lg sm:text-xl px-8 sm:px-12 py-4 sm:py-5 shadow-lg rounded-2xl border-none">Join Batch 2026</button>
+                    <Link to="/register" onClick={() => sm(false)} className="btn-royal mt-6 sm:mt-8 text-lg sm:text-xl px-8 sm:px-12 py-4 sm:py-5 shadow-lg rounded-2xl border-none bg-gradient-to-r from-[#0A1628] to-[#1A3A7A]">Registration Form</Link>
+                    <button onClick={() => { sm(false); openEnquiryModal(); }} className="btn-royal mt-4 text-lg sm:text-xl px-8 sm:px-12 py-4 sm:py-5 shadow-lg rounded-2xl border border-[#0A1628]/20 bg-white text-[#0A1628] hover:bg-slate-50">Join Batch 2026</button>
                 </div>
             )}
 
@@ -68,9 +69,14 @@ const Nav = () => {
                         ))}
                     </div>
 
-                    <button onClick={openEnquiryModal} className="hidden md:flex btn-royal text-xs lg:text-sm shadow-md px-6 py-3 rounded-full border-none">
-                        Enroll Now <i className="fa-solid fa-arrow-right text-xs ml-2"></i>
-                    </button>
+                    <div className="hidden md:flex items-center gap-3 lg:gap-4">
+                        <Link to="/register" className="hidden md:flex bg-gradient-to-r from-[#0A1628] to-[#1A3A7A] hover:bg-gradient-to-l text-white text-xs lg:text-sm shadow-[0_4px_15px_rgba(26,58,122,0.3)] hover:shadow-[0_6px_20px_rgba(26,58,122,0.4)] px-5 py-2.5 rounded-full transition-all duration-300 font-bold tracking-wide border border-[#1A3A7A]/20 hover:-translate-y-0.5 whitespace-nowrap">
+                            Reg. Form
+                        </Link>
+                        <button onClick={openEnquiryModal} className="hidden md:flex btn-royal text-xs lg:text-sm shadow-md px-5 py-2.5 rounded-full border-none whitespace-nowrap">
+                            Enroll Now <i className="fa-solid fa-arrow-right text-xs ml-1 lg:ml-2"></i>
+                        </button>
+                    </div>
 
                     <button className="md:hidden z-50 text-xl sm:text-2xl text-[#0A1628] relative" onClick={() => sm(!m)}>
                         <i className={`fa-solid ${m ? 'fa-xmark' : 'fa-bars'}`} />

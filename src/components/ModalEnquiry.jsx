@@ -14,7 +14,7 @@ const ModalEnquiry = () => {
         const data = new FormData(form);
 
         try {
-            const res = await fetch('https://formsubmit.co/ajax/Neevthreadofwisdom@gmail.com', {
+            const res = await fetch('/api/enquiry', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
                 body: JSON.stringify({
@@ -22,7 +22,7 @@ const ModalEnquiry = () => {
                     phone: data.get('phone'),
                     exam: data.get('exam'),
                     message: data.get('message'),
-                    _subject: 'New NEEV Admission Enquiry (Modal)',
+                    _source: 'modal-enquiry',
                 })
             });
             if (res.ok) {

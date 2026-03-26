@@ -1,0 +1,14 @@
+[
+  {
+    "id": "e7931f0c-50c4-4324-98b0-205e0307dc96",
+    "name": "Test Student",
+    "phone": "9876543210",
+    "email": "",
+    "exam": "JEE Main + Advanced",
+    "message": "This is a test enquiry from the browser",
+    "source": "enquiry-form",
+    "status": "new",
+    "notes": "",
+    "createdAt": "2026-03-26T06:11:42.984Z"
+  }
+]

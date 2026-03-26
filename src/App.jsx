@@ -18,6 +18,7 @@ import CoursePage from './components/CoursePage';
 import GalleryPage from './components/GalleryPage';
 import IndividualCoursePage from './components/IndividualCoursePage';
 import SEO from './components/SEO';
+import RegistrationForm from './components/RegistrationForm';
 
 const Home = () => (
   <>
@@ -51,6 +52,7 @@ export default function App() {
           <Route path="/courses" element={<CoursePage />} />
           <Route path="/courses/:id" element={<IndividualCoursePage />} />
           <Route path="/gallery" element={<GalleryPage />} />
+          <Route path="/register" element={<RegistrationForm />} />
         </Routes>
         <Footer />
         <Floating />
