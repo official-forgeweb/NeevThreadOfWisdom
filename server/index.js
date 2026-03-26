@@ -22,8 +22,8 @@ app.use(cors({
 }));
 app.use(express.json());
 
-// Serve admin panel static files
-app.use('/admin', express.static(path.join(__dirname, 'admin')));
+// Serve admin uploads (if any) or just leave it clean
+// app.use('/admin', express.static(path.join(__dirname, 'admin'))); // Migrated to React Frontend
 
 // API routes
 app.use('/api', publicRoutes);

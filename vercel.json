@@ -1,10 +1,5 @@
 {
   "version": 2,
-  "functions": {
-    "api/index.js": {
-      "includeFiles": "server/admin/**"
-    }
-  },
   "rewrites": [
     {
       "source": "/api/(.*)",
@@ -12,11 +7,15 @@
     },
     {
       "source": "/admin/(.*)",
-      "destination": "/api/index.js"
+      "destination": "/index.html"
     },
     {
       "source": "/admin",
-      "destination": "/api/index.js"
+      "destination": "/index.html"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
