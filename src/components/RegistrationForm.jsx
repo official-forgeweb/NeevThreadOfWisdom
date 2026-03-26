@@ -47,8 +47,7 @@ const RegistrationForm = () => {
         setStatus('loading');
         
         try {
-            const apiUrl = import.meta.env.VITE_API_URL || '';
-            const res = await fetch(`${apiUrl}/api/registration`, {
+            const res = await fetch('/api/registration', {
                 method: 'POST',
                 headers: { 
                     'Content-Type': 'application/json', 

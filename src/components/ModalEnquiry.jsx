@@ -14,8 +14,7 @@ const ModalEnquiry = () => {
         const data = new FormData(form);
 
         try {
-            const apiUrl = import.meta.env.VITE_API_URL || '';
-            const res = await fetch(`${apiUrl}/api/enquiry`, {
+            const res = await fetch('/api/enquiry', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
                 body: JSON.stringify({
