@@ -14,6 +14,7 @@ export const courses = [
         ],
         faculty: "Senior NTW Team",
         features: ["Personalized Mentorship", "NCERT Focused Modules", "Weekly Assessment Tests", "Doubt Clearing Sessions"],
+        price: "₹85,000 / Year",
         color: "#1A3A7A",
         image: "https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=1000&auto=format&fit=crop"
     },
@@ -31,6 +32,7 @@ export const courses = [
         ],
         faculty: "Foundation Experts",
         features: ["Olympiad Preparation", "Mental Ability Training", "Interactive Learning", "Progress Tracking"],
+        price: "₹45,000 / Year",
         color: "#C9A84C",
         image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?q=80&w=1000&auto=format&fit=crop"
     },
@@ -48,6 +50,7 @@ export const courses = [
         ],
         faculty: "IIT Alumni & Experts",
         features: ["Advanced Problem Sets", "All India Test Series", "Rank Improvement Program", "Expert Faculty Support"],
+        price: "₹1,10,000 / Year",
         color: "#0A1628",
         image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?q=80&w=1000&auto=format&fit=crop"
     },
@@ -65,8 +68,9 @@ export const courses = [
         ],
         faculty: "Senior Medical Faculty",
         features: ["Biology Specialization", "Previous Year Analytics", "NTA Pattern Mock Tests", "Daily Practice Papers"],
+        price: "₹95,000 / Year",
         color: "#E53E3E",
-        image: "https://images.unsplash.com/photo-1576091160550-217359f4ecf8?q=80&w=1000&auto=format&fit=crop"
+        image: "https://images.pexels.com/photos/3825586/pexels-photo-3825586.jpeg?auto=compress&cs=tinysrgb&w=1000"
     },
     {
         id: "accountancy-batch",
@@ -82,6 +86,7 @@ export const courses = [
         ],
         faculty: "Sushil Patel (18+ Yrs Exp)",
         features: ["Starts 2nd April 2026", "Timing: 4 to 5:30 pm", "Comprehensive Coverage", "Regular Assessments"],
+        price: "₹25,000 / Year",
         color: "#1F2937",
         image: "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?q=80&w=1000&auto=format&fit=crop"
     }

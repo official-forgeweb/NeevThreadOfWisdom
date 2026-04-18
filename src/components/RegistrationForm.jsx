@@ -109,53 +109,39 @@ const RegistrationForm = () => {
     return (
         <div className="min-h-screen pt-32 pb-20 bg-[#F0F3F9]">
             <SEO title="Student Registration" />
-            <div className="max-w-4xl mx-auto px-4 sm:px-6">
-                
-                {/* Form Container */}
-                <div className="bg-white rounded-[2rem] shadow-[0_20px_50px_rgba(10,22,40,0.1)] border border-slate-200/50 overflow-hidden">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6">
+                <div className="flex flex-col lg:flex-row gap-8 lg:gap-12 items-start">
                     
-                    {/* Artistic Header Section */}
-                    <div className="bg-[#0A1628] p-8 sm:p-12 text-center text-white relative">
+                    {/* Left Sticky Sidebar */}
+                    <div className="w-full lg:w-1/3 lg:sticky lg:top-32 bg-[#0A1628] rounded-[2.5rem] p-8 sm:p-10 text-center text-white relative overflow-hidden shadow-2xl">
                         {/* Decorative Background Elements */}
                         <div className="absolute top-0 right-0 w-80 h-80 bg-[#1A3A7A] rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2 opacity-50"></div>
                         <div className="absolute bottom-0 left-0 w-60 h-60 bg-[#C9A84C] rounded-full blur-[80px] translate-y-1/2 -translate-x-1/2 opacity-20"></div>
                         
                         <div className="relative z-10 flex flex-col items-center">
-                            <div className="flex flex-col items-center mb-6">
-                                <h1 className="text-5xl sm:text-6xl font-anton tracking-[0.1em] mb-1">NEEV</h1>
-                                <p className="text-xs sm:text-sm font-space uppercase tracking-[0.4em] text-[#C9A84C] font-bold">Thread Of Wisdom</p>
+                            <div className="flex flex-col items-center mb-10">
+                                <h1 className="text-5xl sm:text-7xl font-anton tracking-[0.1em] mb-1">NEEV</h1>
+                                <p className="text-[10px] sm:text-xs font-space uppercase tracking-[0.4em] text-[#C9A84C] font-bold">Thread Of Wisdom</p>
                             </div>
                             
-                            <div className="space-y-1 mb-8 opacity-80">
-                                <p className="text-sm font-space">@Unit Of Vishvas Academy</p>
-                                <p className="text-sm font-space font-bold text-white">Contact: 9811309171, 7291839346</p>
-                                <p className="text-[10px] sm:text-xs font-mono tracking-tighter text-slate-400">REG. NO: PSA/REG/FBD/LI-FBD-XIVI0297617</p>
-                            </div>
-                            
-                            <div className="inline-flex items-center gap-4 bg-white/5 backdrop-blur-md px-8 py-3 rounded-2xl border border-white/10 shadow-2xl">
+                            <div className="inline-flex flex-col items-center gap-3 bg-white/5 backdrop-blur-md px-8 py-6 rounded-3xl border border-white/10 shadow-2xl w-full mb-10">
                                 <span className="w-3 h-3 bg-[#C9A84C] rounded-full animate-pulse"></span>
-                                <h2 className="text-xl sm:text-2xl font-anton tracking-widest uppercase">REGISTRATION FORM</h2>
-                                <span className="w-3 h-3 bg-[#C9A84C] rounded-full animate-pulse"></span>
+                                <h2 className="text-xl font-anton tracking-widest uppercase text-center">ADMISSION<br/>APPLICATION</h2>
                             </div>
-                        </div>
 
-                        {/* Top Right Reg No Box */}
-                        <div className="absolute top-8 right-8 hidden lg:block">
-                            <div className="bg-white/5 border border-white/20 p-4 rounded-xl backdrop-blur-sm text-left">
-                                <label className="text-[10px] uppercase tracking-widest opacity-60 block mb-1">Office Use Only</label>
-                                <input 
-                                    type="text" 
-                                    name="regNo" 
-                                    placeholder="REG NO." 
-                                    value={formData.regNo} 
-                                    onChange={handleChange}
-                                    className="bg-transparent border-b border-white/30 focus:border-[#C9A84C] outline-none text-white w-24 text-sm font-mono" 
-                                />
+                            <div className="space-y-3 opacity-80 text-left w-full bg-black/20 p-6 rounded-2xl border border-white/5">
+                                <p className="text-xs font-space text-[#8899AA] uppercase tracking-widest mb-2 font-bold">Helpdesk</p>
+                                <p className="text-sm font-space text-white"><i className="fa-solid fa-phone text-[#C9A84C] mr-2"></i> 9811309171</p>
+                                <p className="text-sm font-space text-white"><i className="fa-solid fa-phone text-[#C9A84C] mr-2"></i> 7291839346</p>
+                                <hr className="border-white/10 my-3" />
+                                <p className="text-[10px] font-mono tracking-tighter text-slate-400">REG: PSA/REG/FBD/LI-FBD-XIVI0297617</p>
                             </div>
                         </div>
                     </div>
 
-                    <form onSubmit={handleSubmit} className="p-8 sm:p-12 space-y-12">
+                    {/* Right Form Container */}
+                    <div className="w-full lg:w-2/3 bg-white rounded-[2.5rem] shadow-[0_20px_50px_rgba(10,22,40,0.05)] border border-slate-200/50 p-6 sm:p-12 mb-8">
+                        <form onSubmit={handleSubmit} className="space-y-12">
                         {/* Section 1: Basic Info */}
                         <div className="space-y-8">
                             <div className="flex items-center gap-4">
@@ -169,10 +155,7 @@ const RegistrationForm = () => {
                                     <label className="text-xs font-bold text-[#4A5568] uppercase tracking-widest pl-1">Full Name of Student</label>
                                     <input required type="text" name="studentName" value={formData.studentName} onChange={handleChange} className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-200 focus:bg-white focus:ring-4 focus:ring-[#1A3A7A]/5 focus:border-[#1A3A7A] transition-all outline-none font-medium" placeholder="Ex: Rahul Sharma" />
                                 </div>
-                                <div className="space-y-2 lg:hidden">
-                                     <label className="text-xs font-bold text-[#4A5568] uppercase tracking-widest pl-1">Reg No.</label>
-                                     <input type="text" name="regNo" value={formData.regNo} onChange={handleChange} className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-200 focus:bg-white focus:ring-4 focus:ring-[#1A3A7A]/5 focus:border-[#1A3A7A] transition-all outline-none font-medium" placeholder="REG No." />
-                                </div>
+
                                 <div className="space-y-2">
                                     <label className="text-xs font-bold text-[#4A5568] uppercase tracking-widest pl-1">Date of Birth</label>
                                     <input required type="date" name="dob" value={formData.dob} onChange={handleChange} className="w-full px-6 py-4 rounded-2xl bg-slate-50 border border-slate-200 focus:bg-white focus:ring-4 focus:ring-[#1A3A7A]/5 focus:border-[#1A3A7A] transition-all outline-none" />
@@ -351,16 +334,8 @@ const RegistrationForm = () => {
                             )}
                         </div>
 
-                        {/* Signatures & Submit */}
-                        <div className="pt-12 mt-12 border-t-2 border-slate-100 border-dashed">
-                            <div className="flex flex-col sm:flex-row justify-between items-center gap-12 sm:gap-24 italic opacity-40 mb-16">
-                                <div className="text-center w-full border-b border-slate-400 pb-2">
-                                    <p className="text-xs font-bold uppercase tracking-[0.2em] font-space not-italic">Applicant Signature</p>
-                                </div>
-                                <div className="text-center w-full border-b border-slate-400 pb-2">
-                                    <p className="text-xs font-bold uppercase tracking-[0.2em] font-space not-italic">Authorised Signature</p>
-                                </div>
-                            </div>
+                        {/* Submit */}
+                        <div className="pt-10 mt-10 border-t border-slate-200">
 
                             <div className="flex flex-col items-center">
                                 <p className="text-[10px] text-slate-400 uppercase tracking-widest mb-6 text-center max-w-md">By clicking submit, I agree to the terms and conditions of NEEV Academy and confirm that all information provided is accurate.</p>
@@ -375,7 +350,8 @@ const RegistrationForm = () => {
                                 </button>
                             </div>
                         </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
             
