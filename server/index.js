@@ -45,7 +45,7 @@ app.get('/api/health', (req, res) => {
     res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
-if (process.env.NODE_ENV !== 'production') {
+if (!process.env.VERCEL && process.env.NODE_ENV !== 'production') {
     app.listen(PORT, () => {
         console.log(`\n🚀 NEEV Server running on http://localhost:${PORT}`);
         console.log(`📋 Admin Panel: http://localhost:${PORT}/admin`);
