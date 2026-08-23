@@ -8,10 +8,12 @@ import publicRoutes from './routes/public.js';
 import adminRoutes from './routes/admin.js';
 import connectDB from './config/db.js';
 
-dotenv.config();
-connectDB();
-
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+dotenv.config({ path: path.join(__dirname, '.env') });
+dotenv.config({ path: path.join(__dirname, '../.env') });
+dotenv.config();
+
+connectDB();
 const app = express();
 const PORT = process.env.PORT || 5000;
 

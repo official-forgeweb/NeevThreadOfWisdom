@@ -206,7 +206,7 @@ const AdminDashboard = () => {
                         <span>Registrations</span>
                     </div>
                 </nav>
-                <div className="p-4 border-t border-white/5">
+                <div className="p-4 border-t border-white/10 mt-auto mb-2">
                     <button className="logout-btn w-full" onClick={handleLogout}>
                         <i className="fa-solid fa-right-from-bracket"></i>
                         <span>Logout</span>
