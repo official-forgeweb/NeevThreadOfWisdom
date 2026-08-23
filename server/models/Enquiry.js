@@ -13,5 +13,5 @@ const enquirySchema = new mongoose.Schema({
 
 // Optional: format `createdAt` into toISOString() in the admin logic or use timestamps natively.
 
-const Enquiry = mongoose.model('Enquiry', enquirySchema);
+const Enquiry = mongoose.models.Enquiry || mongoose.model('Enquiry', enquirySchema);
 export default Enquiry;

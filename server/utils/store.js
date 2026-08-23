@@ -16,8 +16,12 @@ function readJSON(filename) {
 }
 
 function writeJSON(filename, data) {
-    const filePath = path.join(DATA_DIR, filename);
-    fs.writeFileSync(filePath, JSON.stringify(data, null, 2), 'utf-8');
+    try {
+        const filePath = path.join(DATA_DIR, filename);
+        fs.writeFileSync(filePath, JSON.stringify(data, null, 2), 'utf-8');
+    } catch (e) {
+        console.warn(`Write to ${filename} skipped on read-only serverless filesystem:`, e.message);
+    }
 }
 
 export function getAll(filename) {

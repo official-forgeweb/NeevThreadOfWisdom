@@ -35,5 +35,5 @@ const registrationSchema = new mongoose.Schema({
     notes: { type: String, default: '' },
 }, { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } });
 
-const Registration = mongoose.model('Registration', registrationSchema);
+const Registration = mongoose.models.Registration || mongoose.model('Registration', registrationSchema);
 export default Registration;
