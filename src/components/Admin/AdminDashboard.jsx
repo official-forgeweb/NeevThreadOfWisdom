@@ -24,25 +24,36 @@ const AdminDashboard = () => {
     const [modalType, setModalType] = useState(null); // 'enquiry' or 'registration'
     const [notes, setNotes] = useState('');
 
+    const [apiError, setApiError] = useState(null);
     const navigate = useNavigate();
     const token = localStorage.getItem('neev_admin_token');
 
     const fetchWithAuth = useCallback(async (url, options = {}) => {
-        const apiUrl = import.meta.env.VITE_API_URL || '';
-        const res = await fetch(`${apiUrl}${url}`, {
-            ...options,
-            headers: {
-                ...options.headers,
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
+        try {
+            const apiUrl = import.meta.env.VITE_API_URL || '';
+            const res = await fetch(`${apiUrl}${url}`, {
+                ...options,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`,
+                    ...options.headers,
+                }
+            });
+            if (res.status === 401) {
+                localStorage.removeItem('neev_admin_token');
+                navigate('/admin/login');
+                return null;
             }
-        });
-        if (res.status === 401) {
-            localStorage.removeItem('neev_admin_token');
-            navigate('/admin/login');
+            if (!res.ok) {
+                const errData = await res.json().catch(() => ({}));
+                console.error(`API Error (${res.status}):`, errData);
+                return null;
+            }
+            return await res.json();
+        } catch (err) {
+            console.error('Fetch error:', err);
             return null;
         }
-        return res.json();
     }, [token, navigate]);
 
     const loadData = useCallback(async () => {
@@ -51,16 +62,32 @@ const AdminDashboard = () => {
             return;
         }
         setLoading(true);
-        const [statsData, enqData, regData] = await Promise.all([
-            fetchWithAuth('/api/admin/stats'),
-            fetchWithAuth('/api/admin/enquiries'),
-            fetchWithAuth('/api/admin/registrations')
-        ]);
+        setApiError(null);
+        try {
+            const [statsData, enqData, regData] = await Promise.all([
+                fetchWithAuth('/api/admin/stats'),
+                fetchWithAuth('/api/admin/enquiries'),
+                fetchWithAuth('/api/admin/registrations')
+            ]);
 
-        if (statsData) setStats(statsData);
-        if (enqData) setEnquiries(enqData);
-        if (regData) setRegistrations(regData);
-        setLoading(false);
+            if (statsData && typeof statsData === 'object' && !statsData.error) {
+                setStats(prev => ({ ...prev, ...statsData }));
+            }
+            if (Array.isArray(enqData)) {
+                setEnquiries(enqData);
+            } else if (enqData === null) {
+                setApiError('Unable to connect to backend server or database.');
+            }
+
+            if (Array.isArray(regData)) {
+                setRegistrations(regData);
+            }
+        } catch (err) {
+            console.error('Failed to load admin data:', err);
+            setApiError('Failed to load dashboard data. Please try again.');
+        } finally {
+            setLoading(false);
+        }
     }, [token, navigate, fetchWithAuth]);
 
     useEffect(() => {
@@ -113,14 +140,20 @@ const AdminDashboard = () => {
         });
     };
 
-    const filteredEnquiries = enquiries.filter(e => {
-        const matchesSearch = e.name.toLowerCase().includes(searchQuery.toLowerCase()) || e.phone.includes(searchQuery);
+    const safeEnquiries = Array.isArray(enquiries) ? enquiries : [];
+    const safeRegistrations = Array.isArray(registrations) ? registrations : [];
+
+    const filteredEnquiries = safeEnquiries.filter(e => {
+        const name = e.name || e.studentName || '';
+        const phone = e.phone || e.fathersContact || e.applicantPhone || '';
+        const matchesSearch = name.toLowerCase().includes(searchQuery.toLowerCase()) || phone.includes(searchQuery);
         const matchesFilter = statusFilter === 'all' || e.status === statusFilter;
         return matchesSearch && matchesFilter;
     });
 
-    const filteredRegistrations = registrations.filter(r => {
-        const matchesSearch = r.studentName.toLowerCase().includes(searchQuery.toLowerCase());
+    const filteredRegistrations = safeRegistrations.filter(r => {
+        const name = r.studentName || r.name || '';
+        const matchesSearch = name.toLowerCase().includes(searchQuery.toLowerCase());
         const matchesFilter = statusFilter === 'all' || r.status === statusFilter;
         return matchesSearch && matchesFilter;
     });
@@ -201,6 +234,18 @@ const AdminDashboard = () => {
                     </button>
                 </div>
 
+                {apiError && (
+                    <div className="bg-amber-50 border border-amber-200 text-amber-800 px-6 py-4 rounded-2xl mb-8 flex items-center justify-between gap-4 shadow-sm">
+                        <div className="flex items-center gap-3">
+                            <i className="fa-solid fa-triangle-exclamation text-amber-500 text-lg"></i>
+                            <span className="text-sm font-medium">{apiError}</span>
+                        </div>
+                        <button onClick={handleRefresh} className="text-xs font-bold uppercase tracking-wider text-amber-700 hover:text-amber-900 underline">
+                            Retry
+                        </button>
+                    </div>
+                )}
+
                 {activePage === 'dashboard' && (
                     <>
                         <div className="admin-stats-grid">
@@ -214,14 +259,14 @@ const AdminDashboard = () => {
                             <SummaryTable 
                                 title="Recent Enquiries" 
                                 icon="fa-message" 
-                                data={enquiries.slice(0, 5)} 
+                                data={safeEnquiries.slice(0, 5)} 
                                 type="enquiry"
                                 onView={(item) => {setSelectedItem(item); setModalType('enquiry'); setNotes(item.notes || '')}}
                             />
                             <SummaryTable 
                                 title="Recent Registrations" 
                                 icon="fa-user-plus" 
-                                data={registrations.slice(0, 5)} 
+                                data={safeRegistrations.slice(0, 5)} 
                                 type="registration"
                                 onView={(item) => {setSelectedItem(item); setModalType('registration'); setNotes(item.notes || '')}}
                             />

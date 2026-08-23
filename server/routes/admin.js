@@ -11,19 +11,22 @@ const router = Router();
 router.post('/login', async (req, res) => {
     try {
         const { username, password } = req.body;
+        const expectedUsername = process.env.ADMIN_USERNAME || 'admin';
+        const expectedPassword = process.env.ADMIN_PASSWORD || 'neev@admin2026';
+        const jwtSecret = process.env.JWT_SECRET || 'neev_thread_of_wisdom_jwt_secret_2026';
 
-        if (username !== process.env.ADMIN_USERNAME) {
+        if (username !== expectedUsername) {
             return res.status(401).json({ error: 'Invalid credentials' });
         }
 
-        // Compare password (plain text comparison since we store it plain in .env)
-        if (password !== process.env.ADMIN_PASSWORD) {
+        // Compare password
+        if (password !== expectedPassword) {
             return res.status(401).json({ error: 'Invalid credentials' });
         }
 
         const token = jwt.sign(
             { username, role: 'admin' },
-            process.env.JWT_SECRET,
+            jwtSecret,
             { expiresIn: '24h' }
         );
 

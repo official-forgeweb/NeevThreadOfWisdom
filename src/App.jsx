@@ -62,8 +62,9 @@ export default function App() {
           <Route path="/register" element={<RegistrationForm />} />
           
           {/* Admin Routes */}
-          <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/admin/login" element={<AdminLogin />} />
+          <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/admin/*" element={<AdminDashboard />} />
         </Routes>
         {!isAdminPage && <Footer />}
         {!isAdminPage && <Floating />}
